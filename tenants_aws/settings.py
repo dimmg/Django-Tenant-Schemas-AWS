@@ -63,16 +63,28 @@ WSGI_APPLICATION = 'tenants_aws.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'tenant_schemas.postgresql_backend',
-        'NAME': 'aws_tenants',
-        'USER': 'dimmg',
-        'PASSWORD': 'dimmg',
-        'HOST': 'localhost',
-        'PORT': '5432',
+if 'RDS_DB_NAME' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'tenant_schemas.postgresql_backend',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'tenant_schemas.postgresql_backend',
+            'NAME': 'aws_tenants',
+            'USER': 'dimmg',
+            'PASSWORD': 'dimmg',
+            'HOST': 'localhost',
+            'PORT': '5432',
+        }
+    }
 
 DATABASE_ROUTERS = (
     'tenant_schemas.routers.TenantSyncRouter',
