@@ -8,7 +8,6 @@ class User(models.Model):
         ('F', 'female')
     )
     name = models.CharField(max_length=50)
-    age = models.IntegerField()
     idnp = models.CharField(max_length=13)
     gender = models.CharField(max_length=1, choices=GENDER, default='-') 
 
