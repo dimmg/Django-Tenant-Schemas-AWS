@@ -1,1 +1,1 @@
-confirm('add you js files here!');
+confirm('add your .js files here!');

@@ -79,8 +79,8 @@ else:
         'default': {
             'ENGINE': 'tenant_schemas.postgresql_backend',
             'NAME': 'aws_tenants',
-            'USER': 'dimmg',
-            'PASSWORD': 'dimmg',
+            'USER': 'user',
+            'PASSWORD': 'password',
             'HOST': 'localhost',
             'PORT': '5432',
         }
@@ -108,6 +108,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 
 TEMPLATE_DIRS = (
@@ -119,8 +120,6 @@ SHARED_APPS = (
     'customers',
 
     'rest_framework',
-
-    'storages',
 
     'django.contrib.admin',
     'django.contrib.sessions',
@@ -142,10 +141,3 @@ INSTALLED_APPS = list(set(SHARED_APPS + TENANT_APPS))
 PUBLIC_SCHEMA_NAME = 'public'
 
 TENANT_MODEL = 'customers.Customer'
-
-AWS_STORAGE_BUCKET_NAME = 'tenants-aws'  
-AWS_ACCESS_KEY_ID = 'AKIAJ473JKRNOZ5AT7XA'  
-AWS_SECRET_ACCESS_KEY = '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' 
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME  
-STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN  
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage' 
