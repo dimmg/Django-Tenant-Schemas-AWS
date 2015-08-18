@@ -1,5 +1,5 @@
 
-*.pyc
+*.py[cod]
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
